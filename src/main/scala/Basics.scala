@@ -1,24 +1,22 @@
 
 object Basics {
   def main(args: Array[String]): Unit = {
-    import scala.collection.mutable.ArrayBuffer
+    case class Planet(name: String, distance: Int)
 
-    trait Pet {
-      val name: String = "Animal"
+    abstract class MyClass {
+      def DoSomething(): Unit = println("Hello, World!")
+      def DoAnotherThing(x: Int): Unit
     }
 
-    class Cat(override val name: String) extends Pet
-
-    class Dog(val color: String) extends Pet {
-      override val name: String = "Doggo"
+    class MySecondClass extends MyClass {
+      override def DoAnotherThing(x: Int): Unit = println(x)
     }
 
-    val cat = new Cat("Sally")
+    val myValue = new MySecondClass()
 
-    val dog = new Dog("Brown")
-
-    println(dog.name)
-
-
+    myValue.DoSomething()
+    myValue.DoAnotherThing(10)
   }
+
+
 }
