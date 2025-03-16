@@ -1,35 +1,24 @@
 
 object Basics {
   def main(args: Array[String]): Unit = {
+    import scala.collection.mutable.ArrayBuffer
 
-    class Point(private var _x: Int, private var _y: Int) {
-
-      private val bound = 100
-
-      def x: Int = _x
-      def x_=(newValue: Int): Unit = {
-        if (newValue < bound)
-          _x = newValue
-        else
-          printWarning()
-      }
-
-      def y: Int = _y
-      def y_=(newValue: Int): Unit = {
-        if (newValue < bound)
-          _y = newValue
-        else
-          printWarning()
-      }
-
-      private def printWarning(): Unit =
-        println("WARNING: Out of bounds")
+    trait Pet {
+      val name: String = "Animal"
     }
 
-    val point = new Point(1, 2)
-    println(point.x)
-    point.x = point.x + 1
-    println(point.x)
+    class Cat(override val name: String) extends Pet
+
+    class Dog(val color: String) extends Pet {
+      override val name: String = "Doggo"
+    }
+
+    val cat = new Cat("Sally")
+
+    val dog = new Dog("Brown")
+
+    println(dog.name)
+
 
   }
 }
