@@ -15,7 +15,7 @@ object Basics {
     val myValue = new MySecondClass()
 
     myValue.DoSomething()
-    myValue.DoAnotherThing(10)
+    myValue.DoAnotherThing(11)
   }
 
 
