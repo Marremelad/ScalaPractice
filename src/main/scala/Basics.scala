@@ -1,22 +1,29 @@
 
 object Basics {
   def main(args: Array[String]): Unit = {
-    case class Planet(name: String, distance: Int)
-
-    abstract class MyClass {
-      def DoSomething(): Unit = println("Hello, World!")
-      def DoAnotherThing(x: Int): Unit
+    abstract class AbsIterator {
+      type T
+      def hasNext: Boolean
+      def next(): T
     }
 
-    class MySecondClass extends MyClass {
-      override def DoAnotherThing(x: Int): Unit = println(x)
+    class StringIterator(s: String) extends AbsIterator {
+      type T = Char
+      private var i = 0
+      def hasNext: Boolean = i < s.length
+      def next(): Char = {
+        val ch = s.charAt(i)
+        i += 1
+        ch
+      }
     }
 
-    val myValue = new MySecondClass()
+    trait RichIterator extends AbsIterator {
+      def foreach(f: T => Unit): Unit = while (hasNext) f(next())
+    }
 
-    myValue.DoSomething()
-    myValue.DoAnotherThing(11)
+    class RichStringIterator(s: String) extends StringIterator(s) with RichIterator
+    val richStringIterator = new RichStringIterator("Scala")
+    richStringIterator.foreach(println)
   }
-
-
 }
